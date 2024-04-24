@@ -1,4 +1,4 @@
-import React, { Component, Suspense } from "react";
+import { Component, Suspense } from "react";
 import Header from "./components/Header";
 
 import {
