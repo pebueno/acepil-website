@@ -136,13 +136,13 @@ function Header() {
               onClick={handleNavigateToMainPage}
               sx={{ my: 2, color: "white", display: "block" }}
             >
-              Clients
+              Clientes
             </Button>
             <Button
               onClick={handleNavigateToProducts}
               sx={{ my: 2, color: "white", display: "block" }}
             >
-              Products
+              Produtos
             </Button>
           </Box>
 

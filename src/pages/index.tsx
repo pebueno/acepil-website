@@ -19,7 +19,7 @@ import SearchInput from "../components/SearchInput";
 const MainPage: React.FC = () => {
   const [clientName, setClientName] = useState<string>("");
   const [clients, setClients] = useState<any[]>([]);
-  const [errorMessage, setErrorMessage] = useState<string>("");
+//   const [errorMessage, setErrorMessage] = useState<string>("");
 
   useEffect(() => {
     fetchClients();
@@ -98,8 +98,9 @@ const MainPage: React.FC = () => {
   };
 
   const handleSearch = () => {
-    if (!clientName) {
-      setErrorMessage("Please enter a client name.");
+    if (!clientName.trim()) {
+        fetchClients();
+    //   setErrorMessage("Please enter a client name.");
       return;
     }
 
@@ -125,11 +126,11 @@ const MainPage: React.FC = () => {
           placeholder={"Buscar cliente"}
         />
 
-        {errorMessage && (
+        {/* {errorMessage && (
           <Typography variant="body1" color="error" align="center" gutterBottom>
             {errorMessage}
           </Typography>
-        )}
+        )} */}
 
         <TableContainer component={Paper}>
           <Table>

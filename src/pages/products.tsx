@@ -20,7 +20,7 @@ import SearchInput from "../components/SearchInput";
 const Product: React.FC = () => {
   const [productName, setProductName] = useState<string>("");
   const [products, setProducts] = useState<any[]>([]);
-  const [errorMessage, setErrorMessage] = useState<string>("");
+//   const [errorMessage, setErrorMessage] = useState<string>("");
 
   useEffect(() => {
     fetchProducts();
@@ -100,7 +100,8 @@ const Product: React.FC = () => {
 
   const handleSearch = () => {
     if (!productName) {
-      setErrorMessage("Please enter a product name.");
+        fetchProducts();
+    //   setErrorMessage("Please enter a product name.");
       return;
     }
 
@@ -126,11 +127,11 @@ const Product: React.FC = () => {
           placeholder={"Buscar produto"}
         />
 
-        {errorMessage && (
+        {/* {errorMessage && (
           <Typography variant="body1" color="error" align="center" gutterBottom>
             {errorMessage}
           </Typography>
-        )}
+        )} */}
 
         <TableContainer component={Paper}>
           <Table>
