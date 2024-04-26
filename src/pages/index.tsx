@@ -24,7 +24,7 @@ const MainPage: React.FC = () => {
   const fetchClients = () => {
     axios.get("https://acepil-server.onrender.com/api/")
       .then((response) => {
-        setClients(response.data);
+        setClients(response.data.dados);
       })
       .catch((error) => {
         console.error("Error fetching client data:", error);

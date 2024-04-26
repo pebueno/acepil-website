@@ -24,7 +24,7 @@ const Product: React.FC = () => {
   const fetchProducts = () => {
     axios.get("https://acepil-server.onrender.com/api/products")
       .then((response) => {
-        setProducts(response.data);
+        setProducts(response.data.dados);
       })
       .catch((error) => {
         console.error("Error fetching product data:", error);
