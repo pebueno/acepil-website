@@ -16,15 +16,18 @@ import SearchInput from "../components/SearchInput";
 const Product: React.FC = () => {
   const [productName, setProductName] = useState<string>("");
   const [products, setProducts] = useState<any[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
   const fetchProducts = () => {
-    axios.get("https://acepil-server.onrender.com/api/products")
+    axios
+      .get("https://acepil-server.onrender.com/api/products")
       .then((response) => {
         setProducts(response.data.dados);
+        setFilteredProducts(response.data.dados);
       })
       .catch((error) => {
         console.error("Error fetching product data:", error);
@@ -33,15 +36,16 @@ const Product: React.FC = () => {
 
   const handleSearch = () => {
     if (!productName.trim()) {
-      fetchProducts();
+      setFilteredProducts(products);
       return;
     }
 
-    const filteredProducts = products.filter((product) =>
+    const filteredResults = products.filter((product) =>
       product.nome.toLowerCase().includes(productName.toLowerCase())
     );
 
-    setProducts(filteredProducts);
+    setFilteredProducts(filteredResults);
+
     console.log("Search results:", filteredProducts);
   };
 
@@ -69,7 +73,7 @@ const Product: React.FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {products.map((product, index) => (
+              {filteredProducts.map((product, index) => (
                 <TableRow key={index}>
                   <TableCell>{product.nome}</TableCell>
                   <TableCell>{product.codigo}</TableCell>

@@ -16,15 +16,18 @@ import SearchInput from "../components/SearchInput";
 const MainPage: React.FC = () => {
   const [clientName, setClientName] = useState<string>("");
   const [clients, setClients] = useState<any[]>([]);
+  const [filteredClients, setFilteredClients] = useState<any[]>([]);
 
   useEffect(() => {
     fetchClients();
   }, []);
 
   const fetchClients = () => {
-    axios.get("https://acepil-server.onrender.com/api/")
+    axios
+      .get("https://acepil-server.onrender.com/api/")
       .then((response) => {
         setClients(response.data.dados);
+        setFilteredClients(response.data.dados);
       })
       .catch((error) => {
         console.error("Error fetching client data:", error);
@@ -33,15 +36,16 @@ const MainPage: React.FC = () => {
 
   const handleSearch = () => {
     if (!clientName.trim()) {
-      fetchClients();
+      setFilteredClients(clients);
       return;
     }
 
-    const filteredClients = clients.filter((client) =>
+    const filteredResults = clients.filter((client) =>
       client.nome.toLowerCase().includes(clientName.toLowerCase())
     );
 
-    setClients(filteredClients);
+    setFilteredClients(filteredResults);
+
     console.log("Search results:", filteredClients);
   };
 
@@ -69,7 +73,7 @@ const MainPage: React.FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {clients.map((client, index) => (
+              {filteredClients.map((client, index) => (
                 <TableRow key={index}>
                   <TableCell>{client.nome}</TableCell>
                   <TableCell>{client.cpfCnpj}</TableCell>
